@@ -1,4 +1,5 @@
-# MovieRec_FER
+# Detecting Emotions from Face Image for Recommending Movies to the User
+
 
 A lot of the time, our decisions are affected by our emotions and mood. If we are upset, we lean towards certain activities, whereas if we are excited, we desire other activities. Our choice of watching which movie can also be influenced by our emotions. For example, when we are sad, we prefer certain types of movies that differ from the ones we prefer when we are happy.
 
