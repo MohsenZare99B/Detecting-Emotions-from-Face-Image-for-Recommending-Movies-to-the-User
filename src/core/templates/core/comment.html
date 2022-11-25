@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %} Movie {% endblock title %}
+{% block content %}
+<!-- Image and Description -->
+<div class="bg-dark container-fluid" style="min-height:100vh;">
+    <div class="row row-cols-1 row-cols-md-2">
+        <div class="col-md-4 justify-content-left">
+            <img src="{{movie.image.url}}"
+             style="width: auto; height:auto; max-width: 100%; max-height: 100%; object-fit: cover;"
+              class="m-3"/>
+        </div>
+        <div class="col-md-8 p-5 text-center text-white">
+            <a href="{% url 'movie' movie.id %}" class="link-light"><h1>{{movie.title}}</h1></a>
+            <form class="m-5" action="" method="POST">
+                {% csrf_token %}
+                <label>Write your comment</label><br><br>
+                <textarea class="form-control" name="comment" rows="6" cols="50"></textarea><br>
+                <input type="submit" class="btn btn-primary form-control">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

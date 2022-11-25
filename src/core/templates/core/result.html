@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %} result {% endblock title %}
+{% block content %}
+<!-- result -->
+<div class="container-fluid p-5">
+    <div class="row row-cols-1 row-cols-md-2 p-5 justify-content-center">
+        <div class="col">
+            <div class="card">
+                <div class="card-header text-center bg-secondary text-white">
+                    <h1>Result</h1>
+                </div>
+                <div class="card-body p-5">
+                    <div class="row row-cols-1">
+                        <div class="col-3">Angry</div>
+                        <div class="col-9">
+                            <div class="progress">
+                                <div class="progress-bar bg-danger" style={{angry}}></div>
+                              </div>
+                        </div>
+                        <div class="col-3">Disgust</div>
+                        <div class="col-9">
+                            <div class="progress">
+                                <div class="progress-bar bg-success" style={{disgust}}></div>
+                              </div>
+                        </div>
+                        <div class="col-3">Fear</div>
+                        <div class="col-9">
+                            <div class="progress">
+                                <div class="progress-bar bg-primary" style={{fear}}></div>
+                              </div>
+                        </div>
+                        <div class="col-3">Happy</div>
+                        <div class="col-9">
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" style={{happy}}></div>
+                              </div>
+                        </div>
+                        <div class="col-3">Neutral</div>
+                        <div class="col-9">
+                            <div class="progress">
+                                <div class="progress-bar bg-secondary" style={{neutral}}></div>
+                              </div>
+                        </div>
+                        <div class="col-3">Sad</div>
+                        <div class="col-9">
+                            <div class="progress">
+                                <div class="progress-bar bg-dark" style={{sad}}></div>
+                              </div>
+                        </div>
+                        <div class="col-3">Surprise</div>
+                        <div class="col-9">
+                            <div class="progress">
+                                <div class="progress-bar bg-info" style={{surprise}}></div>
+                              </div>
+                        </div>
+                    </div>
+                    <br><br><h3>Recommended Movies:</h3>
+                    <a class="link-secondary" href="{% url 'movie' movie1.id %}">{{movie1.title}}</a><br>
+                    <a class="link-secondary" href="{% url 'movie' movie2.id %}">{{movie2.title}}</a><br>
+                    <a class="link-secondary" href="{% url 'movie' movie3.id %}">{{movie3.title}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

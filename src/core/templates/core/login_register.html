@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}
+Movies
+{% endblock title %}
+{% block content %}
+
+<!-- Login -->
+<div class="container-fluid p-5">
+    <div class="row row-cols-1 row-cols-md-2 p-5 justify-content-center">
+        <div class="col">
+            {% if login %}
+            <form action="{% url 'login_user' %}" method="POST">
+            {% csrf_token %}
+            {% else %}
+            <form action="{% url 'register_user' %}" method="POST">
+            {% csrf_token %}
+            {% endif %}
+            <div class="card">
+                <div class="card-header text-center bg-secondary text-white">
+                    {% if login %}
+                    <h1>Login</h1>
+                    {% else %}
+                    <h1>Register</h1>
+                    {% endif %}
+                </div>
+                <div class="card-body p-5">
+                    {% if message is not None%}
+                    <div class="alert alert-danger">
+                        {{message}}
+                    </div><br>
+                    {% endif %}
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1">@</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Username" name="username">
+                    </div>
+                    <div class="input-group mb-3">
+                        
+                        <input type="password" class="form-control" placeholder="Password" name="password">
+                    </div>
+                </div>
+                <div class="card-footer justify-content-center">
+                    {% if login %}
+                    <input class="btn btn-primary form-control" type="submit" value="Login" />
+                    <br><br><p class="text-center">Don't have an account? <a href="{% url 'register_user' %}">Register</a></p>
+                    {% else %}
+                    <input class="btn btn-primary form-control" type="submit" value="Register" />
+                    <br><br><p class="text-center">Have an account? <a href="{% url 'login_user' %}">Login</a></p>
+                    {% endif %}
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

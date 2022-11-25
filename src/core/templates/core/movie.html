@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% block title %} Movie {% endblock title %}
+{% block content %}
+<!-- Image and Description -->
+<div class="bg-dark container-fluid">
+    <div class="row row-cols-1 row-cols-md-2">
+        <div class="col-md-4 justify-content-left">
+            <img src="{{movie.image.url}}"
+             style="width: auto; height:auto; max-width: 100%; max-height: 100%; object-fit: cover;"
+              class="m-3"/>
+        </div>
+        <div class="col-md-8 p-5 text-center text-white">
+            <h1>{{movie.title}}</h1>
+            <p>{{movie.description}}</p>
+            
+        </div>
+    </div>
+</div>
+
+<!-- votes -->
+<div class="container-fluid ps-5 pe-5 pt-5">
+    <div class="row row-cols-1 row-cols-md-2 justify-content-center">
+        <div class="col">
+            <div class="card">
+                <div class="card-header text-center bg-secondary text-white">
+                    <h6>({{votes}}) votes</h6>
+                </div>
+                <div class="card-body p-5">
+                    <div class="row row-cols-1">
+                        <div class="col-3">Romance</div>
+                        <div class="col-9">
+                            <div class="progress">
+                                <div class="progress-bar bg-danger" style={{romance}}></div>
+                              </div>
+                        </div>
+                        <div class="col-3">Horror</div>
+                        <div class="col-9">
+                            <div class="progress">
+                                <div class="progress-bar bg-success" style={{horror}}></div>
+                              </div>
+                        </div>
+                        <div class="col-3">Comedy</div>
+                        <div class="col-9">
+                            <div class="progress">
+                                <div class="progress-bar bg-primary" style={{comedy}}></div>
+                              </div>
+                        </div>
+                        <div class="col-3">Action</div>
+                        <div class="col-9">
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" style={{action}}></div>
+                              </div>
+                        </div>
+                        <div class="col-3">Fantasy</div>
+                        <div class="col-9">
+                            <div class="progress">
+                                <div class="progress-bar bg-secondary" style={{fantasy}}></div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if can_vote %}
+<!-- you can vote -->
+<div class="container-fluid p-5">
+    <div class="row row-cols-1 row-cols-md-2 justify-content-center">
+        <div class="col">
+            <div class="card">
+                <div class="card-header text-center bg-secondary text-white">
+                    <h6>You can vote...</h6>
+                </div>
+                <div class="card-body p-5">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="row row-cols-1">
+                        <div class="col-3">Romance</div>
+                        <div class="col-9">
+                            <input type="range" class="form-range" min="0" max="10" name="romance">
+                        </div>
+                        <div class="col-3">Horror</div>
+                        <div class="col-9">
+                            <input type="range" class="form-range" min="0" max="10" name="horror">
+                        </div>
+                        <div class="col-3">Comedy</div>
+                        <div class="col-9">
+                            <input type="range" class="form-range" min="0" max="10" name="comedy">
+                        </div>
+                        <div class="col-3">Action</div>
+                        <div class="col-9">
+                            <input type="range" class="form-range" min="0" max="10" name="action">
+                        </div>
+                        <div class="col-3">Fantasy</div>
+                        <div class="col-9">
+                            <input type="range" class="form-range" min="0" max="10" name="fantasy">
+                        </div>
+                        <div class="col-12">
+                            <br>
+                            <input type="submit" value="vote" class="btn btn-primary form-control">
+                        </div>
+                    </div>
+                </form>    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="container-fluid p-5">
+    <div class="row row-cols-1 row-cols-md-2 justify-content-center">
+        <div class="col">
+            <div class="card">
+                <div class="card-header text-center bg-secondary text-white">
+                    <h6>{{vote_message}}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+<div class="container-fluid bg-dark">
+<div class="d-flex justify-content-center">
+<a class="btn btn-primary m-3" href="{% url 'comment' movie.id %}">Add comment</a>
+</div>
+<div class="row gy-3 p-4">
+{% for comment in comments %}
+<div class="container col col-12 p-3 bg-light">
+    <span class="h4 text-primary">{{comment.username}}</span>
+    <span class="text-primary"> - {{comment.date}}</span>
+    <br>
+    <p class="p-2">{{comment.text}}</p>
+</div>
+{% endfor %}
+</div>
+</div>
+{% endblock content%}
